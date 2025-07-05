@@ -1,64 +1,71 @@
 import React, { useState } from 'react';
+import './App.css';
 
 export default function App() {
-  const [제목, 제목변경] = useState('');
-  const [내용, 내용변경] = useState('');
-  const [날짜, 날짜변경] = useState('');
-  const [일기목록, 일기목록변경] = useState([]);
+  const [창, 창변경] = useState('홈')
+  const [아이디, 아이디변경] = useState('')
+  const [비밀번호, 비밀번호변경] = useState('')
 
-  const 일기추가 = () => {
-    const 새일기 = {
-      id: Date.now(),
-      제목,
-      내용,
-      날짜
-    };
-
-    일기목록변경([...일기목록, 새일기]);
-    제목변경('');
-    내용변경('');
-    날짜변경('');
+  const 로그인 = () => {
+    if (!아이디 || !비밀번호) {
+      alert('아이디와 비밀번호를 모두 입력하세요.')
+      return
+    }
   };
 
-  const 일기삭제 = (id) => {
-    일기목록변경(일기목록.filter((a) => a.id !== id));
-  };
-
-  return (
-    <div style={{ maxWidth: '600px', margin: '30px auto', padding: '20px', border: '1px solid #ccc'}}>
-      <h2> 일기장</h2>
-
-      <input
-        type="text"
-        placeholder="제목"
-        value={제목}
-        onChange={(e) => 제목변경(e.target.value)}
-        style={{ width: '100%'}}
-      />
-      <textarea
-        placeholder="내용"
-        value={내용}
-        onChange={(e) => 내용변경(e.target.value)}
-        rows="4"
-        style={{ width: '100%'}}
-      />
-      <input
-        type="date"
-        value={날짜}
-        onChange={(e) => 날짜변경(e.target.value)}
-      />
-
-      <button onClick={일기추가}>일기 추가</button>
-
-
-      {일기목록.map((item) => (
-        <div key={item.id}>
-          <h4>{item.제목}</h4>
-          <p>{item.내용}</p>
-          <p>{item.날짜}</p>
-          <button onClick={() => 일기삭제(item.id)}>삭제</button>
+  if (창 === '홈') {
+    return (
+      <div>
+        <div className='header'>블로그<button onClick={()=> 창변경('로그인')}>로그인</button></div>
+        <div style={{ textAlign: 'center', marginTop: '100px' }}>
+          <button onClick={() => 창변경('로그인')} style={{ fontSize: '18px', padding: '10px 20px' }}>
+            로그인
+          </button>
         </div>
-      ))}
-    </div>
-  );
+      </div>
+    );
+  }
+
+  if (창 === '로그인') {
+    return (
+      <div>
+        <div className='header'>블로그</div>
+        <div style={{ maxWidth: '300px', margin: '100px auto', textAlign: 'center' }}>
+          <h2>로그인</h2>
+          <input
+            type="text"
+            placeholder="아이디를 입력하세요"
+            value={아이디}
+            onChange={(e) => 아이디변경(e.target.value)}
+            style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
+          />
+          <input
+            type="password"
+            placeholder="비밀번호를 입력하세요"
+            value={비밀번호}
+            onChange={(e) => 비밀번호변경(e.target.value)}
+            style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
+          />
+          <button onClick={로그인} style={{ padding: '8px 16px', cursor: 'pointer' }}>
+            로그인
+          </button>
+
+          <div className="links">
+            <span>비밀번호 찾기</span>
+            <span>|</span>
+            <span>아이디 찾기</span>
+            <span>|</span>
+            <span>회원가입</span>
+          </div>
+
+          <button
+            onClick={() => 창변경('홈')}
+            style={{ marginTop: '20px', fontSize: '12px', color: 'gray' }}
+          >
+            뒤로가기
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
