@@ -1,16 +1,17 @@
-<<<<<<< HEAD
-# web-fe
-=======
-# React + Vite
+Last Dance Blog👍
+=================
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Background
 
-Currently, two official plugins are available:
+~~군대 가기 4주 남은 시점~~에 시작한 초보 프로그래머들을 위한 간단한 블로그 만들기 프로젝트
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Members
 
-## Expanding the ESLint configuration
+|조원|역할|조직구성|
+|----|----|---------|
+|황준식|PM, Backend|팀장|
+|홍연준|Backend|팀원|
+|이성준|Frontend|팀원|
+|김현서|Frontend|팀원|
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> c2ce3be (React is ready)
+
