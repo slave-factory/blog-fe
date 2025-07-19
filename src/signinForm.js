@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 
-export default function SigninForm({ setIsLoggedIn, setUserId }) {
-  const [id, setId] = useState('');
+export default function SigninForm({setIsLoggedIn}) {
+  const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [warning, setWarning] = useState('');
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function SigninForm({ setIsLoggedIn, setUserId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!id || !password) {
+    if (!userId || !password) {
       setWarning('아이디와 비밀번호를 모두 입력하세요.');
       return;
     }
@@ -21,7 +21,7 @@ export default function SigninForm({ setIsLoggedIn, setUserId }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', 
-        body: JSON.stringify({ userId: id, password }),
+        body: JSON.stringify({ userId, password }),
       });
 
       const data = await response.json();
@@ -29,7 +29,8 @@ export default function SigninForm({ setIsLoggedIn, setUserId }) {
       if (response.status === 200) {
         setIsLoggedIn(true);
         setUserId(data.userId);
-        navigate('/');
+        navigate('/lastdance', { state: { id: data.id, nickname: data.nickname } });
+
       } else if (response.status === 401) {
         setWarning(data.error);
       } else {
@@ -43,10 +44,7 @@ export default function SigninForm({ setIsLoggedIn, setUserId }) {
   return (
     <div>
       <div className="header">
-        <h4 onClick={() => navigate('/lastdance')} style={{ cursor: 'pointer', marginLeft: '200px' }}>
-          <img src="/images/KakaoTalk_20250712_003924896.png" style={{width: '30px', height: 'auto', verticalAlign: 'middle', verticalAlign: 'middle', position: 'relative', top: '-3px', marginRight:'5px'}}/>
-          블로그
-        </h4>
+        <h4 onClick={() => navigate('/lastdance')} style={{ cursor: 'pointer', marginLeft: '200px' }}><img src="/images/KakaoTalk_20250712_003924896.png" alt='logo' style={{width: '30px', height: 'auto', verticalAlign: 'middle', position: 'relative', top: '-3px', marginRight:'5px'}}/>블로그</h4>
       </div>
 
       <form
@@ -65,8 +63,8 @@ export default function SigninForm({ setIsLoggedIn, setUserId }) {
         <input
           type="text"
           placeholder="아이디를 입력하세요"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
           style={{ width: '400px', marginBottom: '10px', padding: '8px' }}/>
 
         <input

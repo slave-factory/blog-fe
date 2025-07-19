@@ -10,7 +10,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/lastdance" element={<HomeForm isLoggedIn={isLoggedIn} />} />
+        <Route path="/lastdance" element={<HomeForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/lastdance/login" element={<SigninForm setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/lastdance/signup" element={<SignupForm />} />
       </Routes>
