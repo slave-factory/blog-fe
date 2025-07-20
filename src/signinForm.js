@@ -28,7 +28,6 @@ export default function SigninForm({setIsLoggedIn}) {
 
       if (response.status === 200) {
         setIsLoggedIn(true);
-        setUserId(data.userId);
         navigate('/lastdance', { state: { id: data.id, nickname: data.nickname } });
 
       } else if (response.status === 401) {

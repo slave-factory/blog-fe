@@ -1,9 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 
-export default function HomeForm({ isLoggedIn, nickname }) {
+export default function HomeForm({ isLoggedIn , setIsLoggedIn}) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { id, nickname } = location.state || {};
 
   const handleLogout = () => {
     fetch('/api/logout', {
@@ -11,13 +13,15 @@ export default function HomeForm({ isLoggedIn, nickname }) {
       credentials: 'include',
     }).then(() => {
       window.location.reload();
-    });
+    }).then(() => {
+      setIsLoggedIn(false)
+    })
   };
 
   return (
     <div>
       <div className='header'>
-        <h4 onClick={() => window.location.reload()} style={{ cursor: 'pointer', marginLeft: '200px' }}><img src="/images/KakaoTalk_20250712_003924896.png" style={{width: '30px', height: 'auto', verticalAlign: 'middle', position: 'relative', top: '-3px', marginRight:'5px'}}/>블로그</h4>
+        <h4 onClick={() => window.location.reload()} style={{ cursor: 'pointer', marginLeft: '200px' }}><img src="/images/KakaoTalk_20250712_003924896.png" alt='logo' style={{width: '30px', height: 'auto', verticalAlign: 'middle', position: 'relative', top: '-3px', marginRight:'5px'}}/>블로그</h4>
 
         {isLoggedIn ? (
           <span style={{ marginLeft: '855px', cursor: 'pointer' , color: 'white'}}>{nickname}님</span>

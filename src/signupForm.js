@@ -11,7 +11,6 @@ export default function SignupForm() {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +33,6 @@ export default function SignupForm() {
       const data = await response.json();
 
       if (response.status === 201) {
-        setMessage(data.message);
         setSuccess(true);
       } else if (response.status === 409) {
         if (data.error !== error) {
@@ -52,11 +50,22 @@ export default function SignupForm() {
   if (success) {
     return (
       <div>
-        <h2>회원가입 성공</h2>
-        <p>{message}</p>
-        <button onClick={() => navigate('/lastdance/login')}>
-          로그인
-        </button>
+        <div className="header">
+          <h4 onClick={() => navigate('/lastdance')} style={{ cursor: 'pointer', marginLeft: '200px' }}><img src="/images/KakaoTalk_20250712_003924896.png" alt='logo' style={{width: '30px', height: 'auto', verticalAlign: 'middle', position: 'relative', top: '-3px', marginRight:'5px'}}/>블로그</h4>
+        </div>
+        <div style={{
+          textAlign: 'center',
+          marginTop: '100px',
+          border: '1px solid black',
+          width: '500px',
+          height: '550px',
+          marginLeft: '550px'}}>
+          <h2>회원가입 성공</h2>
+          <p>{nickname}님</p>
+          <p>가입을 축하합니다</p>
+          <button onClick={() => navigate('/lastdance/login')} style={{ padding: '10px 190px', cursor: 'pointer', fontSize: '18px', margin: '10px 20px' , marginTop: '120px'}}>로그인</button>
+          <button onClick={() => navigate('/lastdance')} style={{ padding: '10px 190px', cursor: 'pointer', fontSize: '18px', margin: '10px 20px' }}>홈으로</button>
+        </div>
       </div>
     );
   }
@@ -75,7 +84,7 @@ export default function SignupForm() {
           border: '1px solid black',
           width: '500px',
           height: '550px',
-          marginLeft: '550px',
+          marginLeft: '550px'
         }}>
         <h2 style={{ marginTop: '50px', marginBottom: '40px' }}>회원가입</h2>
 
