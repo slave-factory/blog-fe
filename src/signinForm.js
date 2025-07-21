@@ -28,7 +28,9 @@ export default function SigninForm({setIsLoggedIn}) {
 
       if (response.status === 200) {
         setIsLoggedIn(true);
-        navigate('/lastdance', { state: { id: data.id, nickname: data.nickname } });
+        localStorage.setItem('id', data.id);
+        localStorage.setItem('nickname', data.nickname);
+        navigate('/lastdance');
 
       } else if (response.status === 401) {
         setWarning(data.error);
