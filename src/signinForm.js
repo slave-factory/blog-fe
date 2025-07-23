@@ -44,7 +44,7 @@ export default function SigninForm({setIsLoggedIn}) {
 
   return (
     <div>
-      <div className="header">
+      <div className="header" style={{position: 'relative', top: '-1px'}}>
         <h4 onClick={() => navigate('/lastdance')} style={{ cursor: 'pointer', marginLeft: '200px' }}><img src="/images/KakaoTalk_20250712_003924896.png" alt='logo' style={{width: '30px', height: 'auto', verticalAlign: 'middle', position: 'relative', top: '-3px', marginRight:'5px'}}/>블로그</h4>
       </div>
 
