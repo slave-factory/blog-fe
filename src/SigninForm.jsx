@@ -11,13 +11,13 @@ export default function SigninForm({setIsLoggedIn}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!userId || !password) {
+    if (!userId.trim() || !password.trim()) {
       setWarning('아이디와 비밀번호를 모두 입력하세요.');
       return;
     }
 
     try {
-      const response = await fetch('/api/sign', {
+      const response = await fetch('https://69eb0af8e685.ngrok-free.app/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', 
@@ -44,7 +44,7 @@ export default function SigninForm({setIsLoggedIn}) {
 
   return (
     <div>
-      <div className="header" style={{position: 'relative', top: '-1px'}}>
+      <div className="header">
         <h4 onClick={() => navigate('/lastdance')} style={{ cursor: 'pointer', marginLeft: '200px' }}><img src="/images/KakaoTalk_20250712_003924896.png" alt='logo' style={{width: '30px', height: 'auto', verticalAlign: 'middle', position: 'relative', top: '-3px', marginRight:'5px'}}/>블로그</h4>
       </div>
 
@@ -52,11 +52,10 @@ export default function SigninForm({setIsLoggedIn}) {
         onSubmit={handleSubmit}
         style={{
           textAlign: 'center',
-          marginTop: '100px',
           border: '1px solid black',
           width: '500px',
           height: '500px',
-          marginLeft: '550px',
+          margin: '100px auto'
         }}
       >
         <h2 style={{ marginTop: '50px', marginBottom: '40px' }}>로그인</h2>
